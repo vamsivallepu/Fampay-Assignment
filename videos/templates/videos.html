@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    {% for video in page_obj %}
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank">
+                <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}">
+            </a>
+            <div class="caption">
+                <h4>{{ video.title }}</h4>
+                <p>{{ video.description }}</p>
+                <p><strong>Published:</strong> {{ video.published_at }}</p>
+                <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="btn btn-primary">Watch
+                    now</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<style>
+    .thumbnail {
+        position: relative;
+        overflow: hidden;
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .thumbnail:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        transform: translateY(-5px);
+    }
+    
+    .thumbnail img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    .caption {
+        padding: 10px;
+        text-align: center;
+    }
+    
+    h4 {
+        margin-top: 0;
+        font-size: 22px;
+        font-weight: bold;
+        line-height: 1.2;
+    }
+    
+    p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #555;
+    }
+    
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .col-md-4 {
+        width: calc(33% - 10px);
+        margin-bottom: 20px;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .col-md-4 {
+            width: 100%;
+        }
+    }
+</style>
+
+{% endblock %}
