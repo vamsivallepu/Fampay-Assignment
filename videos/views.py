@@ -32,26 +32,60 @@ from .serializers import VideoSerializer
         }
         return JsonResponse(data, safe=False) """
 
-# view for stored videos sorted in descending order by published time
+
 class GetStoredVideosView(View):
+    """
+        A view that retrieves and displays stored videos.
+        Methods:
+            get: Retrieves the videos and renders the HTML template.
+        Usage:
+            Create an instance of this class and add it to the appropriate URL
+            pattern in your Django project's urls.py file.
+    """
+
     def get(self, request):
+        """
+        Retrieve the videos and render the HTML template.
+        Args:
+            request (HttpRequest): The HTTP request object.
+        Returns:
+            HttpResponse: The rendered HTML template displaying the videos.
+        """
         videos = Video.objects.order_by('-published_at')
         paginator = Paginator(videos, 9)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'videos.html', {'page_obj': page_obj})
 
-# View to handle dashboard and filters
+
 class VideoDashboardView(View):
+    """
+    A view that displays the videos dashboard
+    Methods:
+        get: Retrieves and filters videos, orders them, and paginates them before rendering the HTML template.
+    Usage:
+        Create an instance of this class and add it to the appropriate URL
+        pattern in your Django project's urls.py file.
+    """
+
     def get(self, request):
+        """
+        Retrieve and filter videos, order them, and paginate them before rendering the HTML template.
+        Args:
+            request (HttpRequest): The HTTP request object.
+        Returns:
+            HttpResponse: The rendered HTML template displaying the dashboard.
+        """
         # Get all the videos from the database
         videos = Video.objects.all()
 
         # Apply filters if provided in the query parameters
         search_query = request.GET.get('search')
         if search_query:
-            videos = videos.filter(Q(title__icontains=search_query) | Q(description__icontains=search_query))
+            videos = videos.filter(Q(title__icontains=search_query) | Q(
+                description__icontains=search_query))
 
+        # Order the videos if a sort_by parameter is provided in the query string
         sort_by = request.GET.get('sort_by')
         if sort_by:
             videos = videos.order_by(sort_by)
@@ -61,5 +95,5 @@ class VideoDashboardView(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
+        # Render the HTML template with the paginated videos
         return render(request, 'dashboard.html', {'page_obj': page_obj})
-
