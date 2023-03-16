@@ -40,7 +40,13 @@ This will start the Django development server.
 There are two important pages in this project:
 
 1. /api/videos - This page shows 9 out of all the stored videos in the database. You can navigate to other pages from the links provided bottom. All these results are latest videos sorted in reverse chronological order of their publishing date-time. 
+
+![image](https://user-images.githubusercontent.com/53989958/225515604-bd5dea58-ca9e-42e5-8cb5-8cd7ee7a7264.png)
+
 2. /api/dashboard - This page is similar to /api/videos page along with accessibility to filter the results and sort them based on title and published time. 
+
+![image](https://user-images.githubusercontent.com/53989958/225515629-d0692ecc-2413-4c8e-a1bb-5ada9601b76b.png)
+
 
 - ***If quota exisits for one api_key, it automatically makes use of other keys available.***
 
