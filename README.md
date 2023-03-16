@@ -4,9 +4,9 @@ This project allows you to fetch the latest videos from a YouTube channel and st
 To get started with this project, follow these steps:
 
 ## Prerequisites
-- Python 3.6 or later
-- Django 3.0 or later
-- Google API client library for Python
+Install the required dependencies using 
+
+`pip install -r requirements.txt`
 
 ## Installing and Setup
 1. Clone this repository
