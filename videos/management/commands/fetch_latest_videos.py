@@ -1,5 +1,5 @@
 import time
-from django.conf import settings
+from dotenv import load_dotenv
 from django.core.management.base import BaseCommand
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -10,6 +10,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         API_KEY_INDEX=0
+        config=load_dotenv('.env')
+        YOUTUBE_API_KEYS=config['YOUTUBE_API_KEYS']
         while True:
             try:
                 youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEYS[API_KEY_INDEX])
